@@ -10,6 +10,7 @@ import { MenuComponent } from './menu/menu.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/enviroment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { initializeApp } from 'firebase/app';
 
 @NgModule({
   declarations: [
@@ -28,4 +29,4 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
   providers: [],
   bootstrap: [MenuComponent]
 })
-export class AppModule { }
+export class AppModule {}
