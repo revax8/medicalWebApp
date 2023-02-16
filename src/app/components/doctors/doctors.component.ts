@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { DocumentChangeAction } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs';
 import { Doctor } from 'src/app/models/doctor.model';
 import { MedicalService } from 'src/app/services/medical.service';
@@ -9,23 +10,29 @@ import { MedicalService } from 'src/app/services/medical.service';
   styleUrls: ['./doctors.component.css']
 })
 export class DoctorsComponent implements OnInit{
-  doctors?: Doctor[];
-  currentDoctor?: Doctor;
+  @Output() refreshList: EventEmitter<any> = new EventEmitter();
+  doctors?: any[];
+  currentDoctor: Doctor = {
+    name: '',
+    lastName: ''    
+  };
   currentIndex = -1;
   title = '';
+  message = '';
+
   constructor(private medicalService: MedicalService) { }
 
   ngOnInit(): void {
     this.retrieveTutorials();
   }
 
-  refreshList(): void {
-    this.currentDoctor = undefined;
-    this.currentIndex = -1;
-    this.retrieveTutorials();
-  }
+  // refreshList(): void {
+  //   this.currentDoctor = undefined;
+  //   this.currentIndex = -1;
+  //   this.retrieveTutorials();
+  // }
 
-  retrieveTutorials(): void {
+  retrieveTutorials(): void {    
     this.medicalService.getAll().snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
@@ -36,6 +43,18 @@ export class DoctorsComponent implements OnInit{
       this.doctors = data;
     });
   }
+ 
+  deleteDoctor(id : string): void {
+    
+      this.medicalService.delete(id)
+        .then(() => {
+          this.refreshList.emit();
+          this.message = 'The Doctor was updated successfully!';
+        })
+        .catch(err => console.log(err));
+    }
+  
+
 
   setActiveDoctor(tutorial: Doctor, index: number): void {
     this.currentDoctor = tutorial;

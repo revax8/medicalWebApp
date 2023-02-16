@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction } from '@angular/fire/compat/firestore';
 import { Doctor } from '../models/doctor.model';
 
 @Injectable({
@@ -14,5 +14,8 @@ export class MedicalService {
   }
   getAll(): AngularFirestoreCollection<Doctor> {
     return this.doctorsRef;
+  }
+  delete(id: string): Promise<void> {
+    return this.db.doc(`/Doctors/${id}`).delete();
   }
 }
