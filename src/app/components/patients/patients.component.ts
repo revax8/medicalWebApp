@@ -1,29 +1,27 @@
-import { Component } from '@angular/core';
-import { getFirestore, doc, getDocs } from 'firebase/firestore';
-import { Patients } from 'src/app/patients';
-import { PatientsService } from 'src/app/patients.service';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'med-patients',
   templateUrl: './patients.component.html',
   styleUrls: ['./patients.component.css']
 })
-export class PatientsComponent {
+export class PatientsComponent implements OnInit {
+
+  constructor(public firestore: AngularFirestore) { }
+
+  ngOnInit(): void { 
+    this.patientList();
+  }
   
-  patientsList : Patients[] = [];
+  patients: Observable<any> | undefined;
+  patientsCollection: AngularFirestoreCollection<'Patients'> | undefined;
 
-  constructor(private patients: PatientsService) {}
+  patientList() {
+    this.patientsCollection = this.firestore.collection('Patients');
+    this.patients = this.patientsCollection.valueChanges();
+  }
 
-  ngOnInIt(): void {}
 
-  getAllPatients() {
-    this.patients.getAllPatients().subscribe(res => {
-
-        this.patientsList = res.map((e: any) => {
-          const patients = e.payload.doc.data();
-          patients.id = e.payload.doc.id;
-          return patients;
-        })
-    }
-  )}
-}
+  }

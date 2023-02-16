@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { collection, getDoc } from 'firebase/firestore';
-
-
+import { AngularFirestore, AngularFirestoreCollection} from '@angular/fire/compat/firestore';
+import { Patients } from './patients';
 @Injectable({
   providedIn: 'root'
 })
 export class PatientsService {
+  private dbPath = '/Patients';
 
-  constructor(private db: AngularFirestore) {}
+  patientsReference: AngularFirestoreCollection<Patients>;
 
-  getAllPatients(name: string) {
-    const dbConnection = collection(this.db, 'Patients');
-    getDoc(dbConnection, string).then(() => {
-      alert('Data Sent');
-    })
+  constructor(private afs: AngularFirestore) {
+    this.patientsReference = afs.collection(this.dbPath);
   }
- 
+
+  getAllPatients() {
+    return this.patientsReference.valueChanges();
+  }
 }

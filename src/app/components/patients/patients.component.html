@@ -1,5 +1,7 @@
 <h2>Current Patients</h2>
 
 <ul>
-    <li>John Smith</li>
+    <li *ngFor="let patients of patients | async">
+      {{ patients.name }}
+    </li>
 </ul>

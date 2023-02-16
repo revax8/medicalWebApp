@@ -10,20 +10,22 @@ import { MenuComponent } from './menu/menu.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/enviroment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { initializeApp } from 'firebase/app';
+import { CreatePatientComponent } from './components/create-patient/create-patient.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DoctorsComponent,
     PatientsComponent,
-    MenuComponent
+    MenuComponent,
+    CreatePatientComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule,
     AngularFirestoreModule, // for firestore
   ],
   providers: [],
