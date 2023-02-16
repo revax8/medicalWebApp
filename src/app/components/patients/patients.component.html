@@ -1,1 +1,7 @@
-<p>patients works!</p>
+<h2>Current Patients</h2>
+
+<ul>
+    <li *ngFor="let patients of patients | async">
+      {{ patients.name }}
+    </li>
+</ul>
