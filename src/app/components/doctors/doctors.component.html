@@ -1,23 +1,22 @@
-<div class="list row">
-    <div class="col-md-6">
-      <h4>Doctor List</h4>
-      <ul class="list-group">
-        <li
-          class="list-group-item"
-          *ngFor="let doctor of doctors; let i = index"
-          [class.active]="i == currentIndex"
-          (click)="setActiveDoctor(doctor, i)"
-        >
-          {{ doctor.name }}
-          {{ doctor.lastName }}
-
-        </li>
-      </ul>
-    </div>
-    <div class="col-md-6">
-      <div *ngIf="!currentDoctor">
-        <br />
-        <p>Please click on a Doctor...</p>
-      </div>
-    </div>
-  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Last name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let doctor of doctors; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ doctor.name }}</td>
+        <td>{{ doctor.lastName }}</td>
+        
+        <td>
+          <button   (click)="deleteDoctor(doctor.id)"          
+          class="btn btn-primary">Delete</button> &nbsp;
+          <!-- <span routerLink="/update-user/{{doctor.name}}" class="text-primary">Edit</span> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
