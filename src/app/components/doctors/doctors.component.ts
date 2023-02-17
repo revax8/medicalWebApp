@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DocumentChangeAction } from '@angular/fire/compat/firestore';
+import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 import { Doctor } from 'src/app/models/doctor.model';
 import { MedicalService } from 'src/app/services/medical.service';
