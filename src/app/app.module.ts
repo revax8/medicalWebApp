@@ -10,7 +10,6 @@ import { MenuComponent } from './menu/menu.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/enviroment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { CreatePatientComponent } from './components/create-patient/create-patient.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +17,6 @@ import { CreatePatientComponent } from './components/create-patient/create-patie
     DoctorsComponent,
     PatientsComponent,
     MenuComponent,
-    CreatePatientComponent
   ],
   imports: [
     BrowserModule,
