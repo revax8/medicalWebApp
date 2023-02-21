@@ -12,6 +12,7 @@ import { environment } from 'src/environments/enviroment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AddDoctorsComponent } from './components/doctors/add-doctors.component';
 import { StarsComponent } from './utils/stars/stars.component';
+import { AddPatientComponent } from './components/add-patient/add-patient.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { StarsComponent } from './utils/stars/stars.component';
     PatientsComponent,
     MenuComponent,
     AddDoctorsComponent,
-    StarsComponent
+    StarsComponent,
+    AddPatientComponent,
   ],
   imports: [
     BrowserModule,
