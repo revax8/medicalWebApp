@@ -15,7 +15,6 @@ export class ConvertToYesNotPipe implements PipeTransform {
       console.log('entro no')
       return 'No'
     }
-
     return '';
   }
 
