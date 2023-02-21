@@ -13,6 +13,9 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AddDoctorsComponent } from './components/doctors/add-doctors.component';
 import { StarsComponent } from './utils/stars/stars.component';
 import { AddPatientComponent } from './components/add-patient/add-patient.component';
+import { InitialPageComponent } from './initial-page/initial-page.component';
+import { ConvertToYesNotPipe } from './utils/pipes/convert-to-yes-not.pipe';
+
 
 @NgModule({
   declarations: [
@@ -23,6 +26,8 @@ import { AddPatientComponent } from './components/add-patient/add-patient.compon
     AddDoctorsComponent,
     StarsComponent,
     AddPatientComponent,
+    InitialPageComponent,
+    ConvertToYesNotPipe,
   ],
   imports: [
     BrowserModule,

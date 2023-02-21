@@ -12,11 +12,21 @@ import { MedicalService } from 'src/app/services/medical.service';
 })
 export class DoctorsComponent implements OnInit{
   doctors?: any[];
+  doctorsFiltered : any[];
   currentIndex = -1;
   title = '';
   message = '';
+  filterValue = '';
 
   constructor(private medicalService: MedicalService) { }
+
+  get filter(){
+    return this.filterValue;
+  }
+  set filter(value){
+    this.filterValue = value;
+    this.doctorsFiltered = this.performFilter(value);
+  }
 
   ngOnInit(): void {
     this.retrieveTutorials();
@@ -32,6 +42,7 @@ export class DoctorsComponent implements OnInit{
       )
     ).subscribe(data => {
       this.doctors = data;
+      this.doctorsFiltered = data;
     });
   }
  
@@ -42,4 +53,11 @@ export class DoctorsComponent implements OnInit{
         })
         .catch(err => console.log(err));
     }
+
+  performFilter(value : string): any{
+    value = value.toLocaleLowerCase();
+    return  this.doctors?.filter (  
+                                    (x: Doctor)=> x.name.toLocaleLowerCase().includes(value) 
+                                )
+  }
 }

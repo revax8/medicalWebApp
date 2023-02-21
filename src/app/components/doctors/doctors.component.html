@@ -1,10 +1,14 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Last name</th>
-        <th scope="col">Email</th>
+        <th>Search by Name</th>
+        <th><input [(ngModel)] ="filter"  type="text"></th>
+      </tr>
+      <tr>
+        <th>#</th>
+        <th >Name</th>
+        <th>Last name</th>
+        <th>Email</th>
         <th>Phone</th>
         <th>Experience</th>
         <th>Required</th>
@@ -12,14 +16,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let doctor of doctors; let i = index">
+      <tr *ngFor="let doctor of doctorsFiltered; let i = index">
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ doctor.name}}</td>
         <td>{{ doctor.lastName}}</td>
         <td>{{ doctor.email}}</td>
         <td>{{ doctor.phone}}</td>
         <td><med-stars [experience] = "doctor.experience"  ></med-stars></td>
-        <td>{{ doctor.required}}</td>
+        <td>{{ doctor.required | convertToYesNot}}</td>
         <td>
           <button   (click)="deleteDoctor(doctor.id)"          
           class="btn btn-primary">Delete</button> &nbsp;
