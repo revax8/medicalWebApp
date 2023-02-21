@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +11,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/enviroment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AddDoctorsComponent } from './components/doctors/add-doctors.component';
+import { StarsComponent } from './utils/stars/stars.component';
 
 @NgModule({
   declarations: [
@@ -18,12 +19,14 @@ import { AddDoctorsComponent } from './components/doctors/add-doctors.component'
     DoctorsComponent,
     PatientsComponent,
     MenuComponent,
-    AddDoctorsComponent
+    AddDoctorsComponent,
+    StarsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireModule,
     AngularFirestoreModule, // for firestore

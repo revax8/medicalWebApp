@@ -18,4 +18,7 @@ export class MedicalService {
   delete(id: string): Promise<void> {
     return this.db.doc(`/Doctors/${id}`).delete();
   }
+  create(doctor: Doctor): any {
+    return this.doctorsRef.add({ ...doctor });
+  }
 }

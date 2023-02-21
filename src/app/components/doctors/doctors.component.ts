@@ -11,12 +11,7 @@ import { MedicalService } from 'src/app/services/medical.service';
   styleUrls: ['./doctors.component.css']
 })
 export class DoctorsComponent implements OnInit{
-  @Output() refreshList: EventEmitter<any> = new EventEmitter();
   doctors?: any[];
-  currentDoctor: Doctor = {
-    name: '',
-    lastName: ''    
-  };
   currentIndex = -1;
   title = '';
   message = '';
@@ -27,11 +22,6 @@ export class DoctorsComponent implements OnInit{
     this.retrieveTutorials();
   }
 
-  // refreshList(): void {
-  //   this.currentDoctor = undefined;
-  //   this.currentIndex = -1;
-  //   this.retrieveTutorials();
-  // }
 
   retrieveTutorials(): void {    
     this.medicalService.getAll().snapshotChanges().pipe(
@@ -46,20 +36,10 @@ export class DoctorsComponent implements OnInit{
   }
  
   deleteDoctor(id : string): void {
-    
       this.medicalService.delete(id)
         .then(() => {
-          this.refreshList.emit();
           this.message = 'The Doctor was updated successfully!';
         })
         .catch(err => console.log(err));
     }
-  
-
-
-  setActiveDoctor(tutorial: Doctor, index: number): void {
-    this.currentDoctor = tutorial;
-    this.currentIndex = index;
-  }
-
 }

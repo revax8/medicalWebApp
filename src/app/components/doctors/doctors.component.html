@@ -4,14 +4,23 @@
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Last name</th>
-        <th><button routerLink="/addDoctors" class="btn btn-primary" >Add new</button></th>
+        <th scope="col">Email</th>
+        <th>Phone</th>
+        <th>Experience</th>
+        <th>Required</th>
+        <th><button routerLink="/addDoctors" class="btn btn-success btn-sm" >Add New</button></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let doctor of doctors; let i = index">
         <th scope="row">{{ i + 1 }}</th>
-        <td>{{ doctor.name }}</td>
-        <td>{{ doctor.lastName }}</td>
+        <td>{{ doctor.name}}</td>
+        <td>{{ doctor.lastName}}</td>
+        <td>{{ doctor.email}}</td>
+        <td>{{ doctor.phone}}</td>
+        <td><med-stars [experience] = "doctor.experience"  ></med-stars></td>
+        <td>{{ doctor.required}}</td>
+ 
         
         <td>
           <button   (click)="deleteDoctor(doctor.id)"          
