@@ -15,8 +15,8 @@
                 <li class="nav-item">
                   <a *ngIf="isLoggedIn" class="nav-link" routerLink="/patients">Patients</a>
                 </li>
-                  <button *ngIf="!isLoggedIn" class="btn btn-outline-info" (click)="login()" >Login</button>
-                  <button *ngIf="isLoggedIn" class="btn btn-outline-info"  (click)="logout()">Logout</button>
+                  <span style="display: inline-block;"> <button *ngIf="!isLoggedIn" class="btn btn-outline-info btn-sm auth-buttons bi bi-person-fill me-2" (click)="login()" >Login</button></span>
+                  <span style="display: inline-block;"><button *ngIf="isLoggedIn" class="btn-sm auth-buttons btn btn-danger"  (click)="logout()"><i class="bi bi-box-arrow-right me-2"></i>Logout</button></span>
               </ul>
             </div>
           </nav>
