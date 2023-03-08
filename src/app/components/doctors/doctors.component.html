@@ -13,6 +13,8 @@
         <th>Experience</th>
         <th>Required</th>
         <th><button routerLink="/addDoctors" class="btn btn-success btn-sm" >Add New</button></th>
+        <th></th>
+        <th>id</th>
       </tr>
     </thead>
     <tbody>
@@ -24,11 +26,13 @@
         <td>{{ doctor.phone}}</td>
         <td><med-stars [experience] = "doctor.experience"  ></med-stars></td>
         <td>{{ doctor.required | convertToYesNot}}</td>
+        <td><button   (click)="deleteDoctor(doctor.id)" class="btn btn-primary">Delete</button></td>
         <td>
-          <button   (click)="deleteDoctor(doctor.id)"          
-          class="btn btn-primary">Delete</button> &nbsp;
-          <!-- <span routerLink="/update-user/{{doctor.name}}" class="text-primary">Edit</span> -->
+          <!-- <button class="btn btn-primary" routerLink="/updateDoctors/{{doctor.id}}" >Edit </button> -->
+          <!-- <button class="btn btn-primary" [routerLink] ="['/updateDoctors']" [state]="doctor" >Edit </button> -->
+          <button class="btn btn-primary" (click)="sendDynamicData(doctor)" >Edit </button>
         </td>
+        <td>{{doctor.id}}</td>
       </tr>
     </tbody>
   </table>

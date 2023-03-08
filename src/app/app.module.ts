@@ -15,6 +15,8 @@ import { StarsComponent } from './utils/stars/stars.component';
 import { AddPatientComponent } from './components/add-patient/add-patient.component';
 import { InitialPageComponent } from './initial-page/initial-page.component';
 import { ConvertToYesNotPipe } from './utils/pipes/convert-to-yes-not.pipe';
+import { SigninRedirectCallbackComponent } from './menu/signin-redirect-callback.component';
+import { SignoutRedirectCallbackComponent } from './menu/signout-redirect-callback.component';
 
 
 @NgModule({
@@ -28,6 +30,8 @@ import { ConvertToYesNotPipe } from './utils/pipes/convert-to-yes-not.pipe';
     AddPatientComponent,
     InitialPageComponent,
     ConvertToYesNotPipe,
+    SigninRedirectCallbackComponent,
+    SignoutRedirectCallbackComponent
   ],
   imports: [
     BrowserModule,

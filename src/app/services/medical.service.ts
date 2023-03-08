@@ -6,7 +6,7 @@ import { Doctor } from '../models/doctor.model';
   providedIn: 'root'
 })
 export class MedicalService {
-  private dbPath = '/Doctors';  
+  private dbPath = '/Doctors';
   doctorsRef!: AngularFirestoreCollection<Doctor>;
 
   constructor(private db: AngularFirestore) {
@@ -20,5 +20,8 @@ export class MedicalService {
   }
   create(doctor: Doctor): any {
     return this.doctorsRef.add({ ...doctor });
+  }
+  update(id:string, data:any){
+    return this.doctorsRef.doc(id).update(data);
   }
 }

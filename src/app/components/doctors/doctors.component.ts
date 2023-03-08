@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DocumentChangeAction } from '@angular/fire/compat/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { Doctor } from 'src/app/models/doctor.model';
 import { MedicalService } from 'src/app/services/medical.service';
@@ -18,7 +18,7 @@ export class DoctorsComponent implements OnInit{
   message = '';
   filterValue = '';
 
-  constructor(private medicalService: MedicalService) { }
+  constructor(private medicalService: MedicalService, private router:Router) { }
 
   get filter(){
     return this.filterValue;
@@ -33,7 +33,7 @@ export class DoctorsComponent implements OnInit{
   }
 
 
-  retrieveTutorials(): void {    
+  retrieveTutorials(): void {
     this.medicalService.getAll().snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
@@ -45,7 +45,7 @@ export class DoctorsComponent implements OnInit{
       this.doctorsFiltered = data;
     });
   }
- 
+
   deleteDoctor(id : string): void {
       this.medicalService.delete(id)
         .then(() => {
@@ -56,8 +56,12 @@ export class DoctorsComponent implements OnInit{
 
   performFilter(value : string): any{
     value = value.toLocaleLowerCase();
-    return  this.doctors?.filter (  
-                                    (x: Doctor)=> x.name.toLocaleLowerCase().includes(value) 
+    return  this.doctors?.filter (
+                                    (x: Doctor)=> x.name.toLocaleLowerCase().includes(value)
                                 )
   }
+sendDynamicData(doctor:Doctor){
+this.router.navigateByUrl('/updateDoctor',{ state: doctor })
+}
+
 }

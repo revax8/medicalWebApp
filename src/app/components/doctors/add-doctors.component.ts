@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Doctor } from 'src/app/models/doctor.model';
 import { MedicalService } from 'src/app/services/medical.service';
 
@@ -18,11 +18,14 @@ function experienceRangeValidation (c: AbstractControl) : {[key:string] : boolea
 export class AddDoctorsComponent implements OnInit{
   doctorFormGroup!: FormGroup;
   doctor = new Doctor();
+  pageTitle = 'Add Doctor';
   showMessage : boolean = false;
 
 
-constructor(private router: Router, private fb : FormBuilder, private medicalService : MedicalService){
-
+constructor(private router: Router,
+            private fb : FormBuilder,
+            private medicalService : MedicalService,
+            private activatedRoute : ActivatedRoute ){
 }
   ngOnInit(): void {
     this.doctorFormGroup = this.fb.group({
@@ -33,16 +36,52 @@ constructor(private router: Router, private fb : FormBuilder, private medicalSer
       required :  false,
       experience : [null, experienceRangeValidation],
     })
+
+    if (history.state.id)
+    this.displayDoctor(history.state);
   }
   onBack(): void{
     this.router.navigate(["/doctors"])
   }
 
+  displayDoctor(doctor:Doctor) : void {
+    if (this.doctorFormGroup) {
+      this.doctorFormGroup.reset();
+    }
+    this.doctor = doctor;
+    if (doctor.name) {
+      this.pageTitle = 'Edit Doctor';
+    }else {
+      this.pageTitle = 'Add doctor';
+    }
+
+    this.doctorFormGroup.patchValue({
+      name: this.doctor.name,
+      lastName: this.doctor.lastName,
+      email: this.doctor.email,
+      phone: this.doctor.phone,
+      required: this.doctor.required,
+      experience: this.doctor.experience
+    }
+
+    )
+
+  }
+
+  retrieveDoctor():void{
+this.medicalService.getAll
+
+  }
   save(): void {
-    var p = {...this.doctor, ...this.doctorFormGroup.value};
-    this.medicalService.create(p).then(() => {
-      console.log('Created new item successfully!');
-    });
+        var p = {...this.doctor, ...this.doctorFormGroup.value};
+
+        if (history.state.id){
+        this.medicalService.update(history.state.id,p)
+        }else {
+        this.medicalService.create(p).then(() => {
+        console.log('Created new item successfully!');
+         });
+        }
   }
 
   setNotification(e : any): void {
@@ -54,8 +93,8 @@ constructor(private router: Router, private fb : FormBuilder, private medicalSer
       this.showMessage = false;
       phoneFormControl?.clearValidators();
     }
-    phoneFormControl?.updateValueAndValidity(); 
-    
+    phoneFormControl?.updateValueAndValidity();
+
   }
 
 }
