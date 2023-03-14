@@ -1,9 +1,39 @@
-<med-add-patient></med-add-patient>
+<div class="card">
+<div class="card-header">
+  <h2>Current Patients</h2>
+</div>
+<div class="card-body">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Search by name</th>
+        <th><input [(ngModel)]="filter"  type="text"></th>
+      </tr>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Last name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th><button [routerLink]="['/addPatient']" class="btn btn-success btn-sm" ><i class="fa fa-pencil-square-o"></i> Add new</button></th>
+        <th></th>
+      </tr>
+  </thead>
+    <tbody>
+      <tr *ngFor="let patient of filteredPatients; let i=index">
+        <td>{{i+1}}</td>
+        <td>{{patient.name }}</td>
+        <td>{{patient.lastName}}</td>
+        <td>{{patient.phoneNumber}}</td>
+        <td>{{patient.email}}</td>
+        <td><button class="btn btn-danger btn-sm" (click)="deleteData(patient.id)" ><i class="bi bi-trash-fill"></i> Delete</button></td>
+        <td><button class="btn btn-primary btn-sm" (click)="sendData(patient)" ><i class="bi bi-pencil-fill"></i> Edit</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <ul>
 
-<h2>Current Patients</h2>
-
-<ul>
-    <li *ngFor="let patients of patients | async">
-      {{ patients.name }}
-    </li>
 </ul>
+</div>
+</div>
+

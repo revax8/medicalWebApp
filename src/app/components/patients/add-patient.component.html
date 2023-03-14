@@ -1,0 +1,74 @@
+<div class="card" style="width: 500px;">
+  <div class="card-header">
+    <h3>{{pageTitle}}</h3>
+  </div>
+
+  <form novalidate (ngSubmit) = "save()" [formGroup] = "patientFormGroup">
+
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+            <i>Name: </i>
+            <input type="text"
+            placeholder="Name"
+            formControlName ="name"
+            [ngClass]="{'form-control is-invalid': (patientFormGroup.get('name')?.touched
+                        || patientFormGroup.get('name')?.dirty)
+                      && !patientFormGroup.get('name')?.valid}">
+        </div>
+
+        <div class="col-md-6">
+          <i>Last name</i>
+          <input type="text"
+          placeholder="Last Name (required)"
+          formControlName="lastName"
+          [ngClass]="{'form-control is-invalid':  (patientFormGroup.get('lastName')?.touched
+                      || patientFormGroup.get('lastName')?.dirty)
+                      && !patientFormGroup.get('lastName')?.valid}" >
+        </div>
+
+        <div class="col-md-6">
+          <i>Phone: </i>
+          <input type="text"
+          placeholder="Phone (required)"
+          formControlName="phoneNumber"
+          [ngClass]="{'form-control is-invalid': (patientFormGroup.get('phoneNumber')?.touched
+                      || patientFormGroup.get('phoneNumber')?.dirty)
+                      && !patientFormGroup.get('phoneNumber')?.valid}">
+      </div>
+
+      <div class="col-md-6">
+        <i>Email</i>
+        <input type="email"
+        formControlName="email"
+        placeholder="Email (Required)"
+        [ngClass]="{'form-control is-invalid' : ( patientFormGroup.get('email')?.touched
+                    ||  patientFormGroup.get('email')?.dirty)
+                    && !patientFormGroup.get('email')?.valid}"
+        >
+      </div>
+
+    </div>
+    </div>
+
+    <div class="card-footer">
+        <button class="btn btn-outline-secondary"
+        style="width: 90px;"
+        (click)="onBack()">
+        <i class="fa fa-chevron-left">Cancel</i>
+        </button> &nbsp;
+
+        <button
+        class="btn btn-primary"
+        style="width: 90px;"
+        [title] = "patientFormGroup.valid ? 'Save your data' : 'Disabled until the form data is valid'"
+        [disabled] = "!patientFormGroup.valid"
+        >Save
+        </button>
+
+    </div>
+  </form>
+
+</div>
+
+<med-alert [message]="alertMessage" [classes]="['alert-warning']" (cerrado)="closeMedAlert()"></med-alert>

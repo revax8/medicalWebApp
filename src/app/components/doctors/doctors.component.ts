@@ -29,11 +29,11 @@ export class DoctorsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.retrieveTutorials();
+    this.retrieveDoctors();
   }
 
 
-  retrieveTutorials(): void {
+  retrieveDoctors(): void {
     this.medicalService.getAll().snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>

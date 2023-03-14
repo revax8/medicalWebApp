@@ -20,12 +20,13 @@ export class AddDoctorsComponent implements OnInit{
   doctor = new Doctor();
   pageTitle = 'Add Doctor';
   showMessage : boolean = false;
+  alertMessage = '';
 
 
 constructor(private router: Router,
             private fb : FormBuilder,
-            private medicalService : MedicalService,
-            private activatedRoute : ActivatedRoute ){
+            private medicalService : MedicalService
+             ){
 }
   ngOnInit(): void {
     this.doctorFormGroup = this.fb.group({
@@ -36,10 +37,10 @@ constructor(private router: Router,
       required :  false,
       experience : [null, experienceRangeValidation],
     })
-
     if (history.state.id)
     this.displayDoctor(history.state);
   }
+
   onBack(): void{
     this.router.navigate(["/doctors"])
   }
@@ -51,8 +52,6 @@ constructor(private router: Router,
     this.doctor = doctor;
     if (doctor.name) {
       this.pageTitle = 'Edit Doctor';
-    }else {
-      this.pageTitle = 'Add doctor';
     }
 
     this.doctorFormGroup.patchValue({
@@ -77,9 +76,11 @@ this.medicalService.getAll
 
         if (history.state.id){
         this.medicalService.update(history.state.id,p)
+        this.showAlert();
         }else {
         this.medicalService.create(p).then(() => {
         console.log('Created new item successfully!');
+        this.showAlert();
          });
         }
   }
@@ -96,5 +97,13 @@ this.medicalService.getAll
     phoneFormControl?.updateValueAndValidity();
 
   }
+
+  closeMedAlert(): void {
+    this.alertMessage = '';
+    this.router.navigate(['/doctors'])
+    }
+    showAlert() {
+      this.alertMessage = 'Saved Successfully';
+    }
 
 }
